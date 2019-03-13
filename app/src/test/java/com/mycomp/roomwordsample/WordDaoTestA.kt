@@ -13,7 +13,6 @@ import org.junit.*
 import org.junit.runner.RunWith
 
 @RunWith(AndroidJUnit4::class)
-//@RunWith(RobolectricTestRunner::class)
 class WordDaoTestA {
     private lateinit var wordRoomDatabase: WordRoomDatabase
     private lateinit var wordDao: WordDao
