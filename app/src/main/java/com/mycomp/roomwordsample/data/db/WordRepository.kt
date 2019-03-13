@@ -7,7 +7,7 @@ import kotlinx.coroutines.withContext
 
 class WordRepository(private val wordDao: WordDao): WordRepo {
 
-    val allWords: LiveData<List<Word>> = wordDao.getAllLiveWords()
+    override val allWords: LiveData<List<Word>> = wordDao.getAllLiveWords()
 
     @WorkerThread
     override suspend fun insertAll(words: List<Word>): List<Long> = withContext(IO) {

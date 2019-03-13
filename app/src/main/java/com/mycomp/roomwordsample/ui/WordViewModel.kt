@@ -4,10 +4,10 @@ import androidx.lifecycle.LiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.mycomp.roomwordsample.data.db.Word
-import com.mycomp.roomwordsample.data.db.WordRepository
+import com.mycomp.roomwordsample.data.db.WordRepo
 import kotlinx.coroutines.*
 
-class WordViewModel(private val wordRepository: WordRepository) : ViewModel() {
+class WordViewModel(private val wordRepository: WordRepo) : ViewModel() {
 
     val allWords: LiveData<List<Word>> = wordRepository.allWords
 
