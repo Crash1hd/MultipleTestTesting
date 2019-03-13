@@ -16,12 +16,8 @@ class WordRepository(private val wordDao: WordDao): WordRepo {
         return@withContext wordDao.insertAll(words)
     }
 
-//    override suspend fun getAllLogs(): List<LogModel> = withContext(Dispatchers.IO) {
-//        return@withContext logDao.getAllLogs()
-//    }
-
     @WorkerThread
-    suspend fun deleteAllLogsOlderThan(XDays: Int): Int = withContext(IO) {
+    override suspend fun deleteAllLogsOlderThan(XDays: Int): Int = withContext(IO) {
         print("Calling Delete All Logs Older Than In Repo: $XDays \n")
         return@withContext wordDao.deleteAll()
     }

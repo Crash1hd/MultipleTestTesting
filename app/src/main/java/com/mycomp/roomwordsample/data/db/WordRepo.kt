@@ -8,4 +8,7 @@ interface WordRepo {
     @WorkerThread
     suspend fun insertAll(words: List<Word>): List<Long>
 
+    @WorkerThread
+    suspend fun deleteAllLogsOlderThan(XDays: Int): Int
+
 }

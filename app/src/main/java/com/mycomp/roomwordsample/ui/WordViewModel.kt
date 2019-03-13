@@ -28,9 +28,7 @@ class WordViewModel(private val wordRepository: WordRepository) : ViewModel() {
     }
 
     fun insertAll(words: List<Word>): List<Long> = runBlocking {
-        //return viewModelScope.launch {
-            wordRepository.insertAll(words)
-        //}
+        wordRepository.insertAll()
     }
 
     fun deleteAllLogsOlderThanA(XDays:Int): Int = runBlocking {

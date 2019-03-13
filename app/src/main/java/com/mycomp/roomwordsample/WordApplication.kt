@@ -56,7 +56,6 @@ class WordApplication: Application(), KodeinAware {
         println("Initialize Logging Called")
         val logViewModelFactory: WordViewModelFactory by instance()
 
-
         println("initialize logging called logViewModelFactory Instance: $logViewModelFactory")
 //        val wordRoomDatabase = Room.inMemoryDatabaseBuilder(this, WordRoomDatabase::class.java).build()
 //        val wordDao = wordRoomDatabase.wordDao()
