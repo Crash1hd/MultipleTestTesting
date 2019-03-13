@@ -1,13 +1,15 @@
 package com.mycomp.roomwordsample
 
 import androidx.room.Room
-
 import androidx.arch.core.executor.testing.InstantTaskExecutorRule
 import androidx.test.ext.junit.runners.AndroidJUnit4
 import androidx.test.platform.app.InstrumentationRegistry
 import com.mycomp.roomwordsample.data.db.WordDao
 import com.mycomp.roomwordsample.data.db.WordRoomDatabase
 import com.mycomp.roomwordsample.data.utilities.getValue
+import kotlinx.coroutines.Dispatchers.IO
+import kotlinx.coroutines.runBlocking
+import kotlinx.coroutines.withContext
 import org.hamcrest.Matchers.equalTo
 import org.junit.*
 import org.junit.runner.RunWith
@@ -28,7 +30,11 @@ class WordDaoTestA {
         wordRoomDatabase = Room.inMemoryDatabaseBuilder(context, WordRoomDatabase::class.java).build()
         wordDao = wordRoomDatabase.wordDao()
 
-        wordRoomDatabase.wordDao().insertAll(testWords)
+        runBlocking {
+            withContext(IO) {
+                wordRoomDatabase.wordDao().insertAll(testWords)
+            }
+        }
     }
 
     @After
@@ -40,22 +46,26 @@ class WordDaoTestA {
 
     @Test
     fun testAAA() {
-        println("Test One")
-        Assert.assertThat(getValue(wordDao.getAllLiveWords()).size, equalTo(3))
-        println("End Test One")
+        runBlocking {
+            withContext(IO) {
+                println("Test One")
+                Assert.assertThat(getValue(wordDao.getAllLiveWords()).size, equalTo(3))
+                println("End Test One")
+            }
+        }
     }
 
     @Test
     fun testBBB() {
         println("Test Two")
-        Assert.assertThat(getValue(wordDao.getAllLiveWords()).size, equalTo(3))
+        Assert.assertThat(runBlocking{withContext(IO){getValue(wordDao.getAllLiveWords()).size}}, equalTo(3))
         println("End of Test Two")
     }
 
     @Test
     fun testCCC() {
         println("Test 3")
-        Assert.assertThat(getValue(wordDao.getAllLiveWords()).size, equalTo(3))
+        Assert.assertThat(runBlocking{withContext(IO){getValue(wordDao.getAllLiveWords()).size}}, equalTo(3))
         println("End of Test 3")
     }
 
