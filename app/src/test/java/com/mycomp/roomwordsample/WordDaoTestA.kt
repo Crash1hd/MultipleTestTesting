@@ -26,7 +26,7 @@ class WordDaoTestA {
     fun createDb() {
         println("Opening test DB")
         val context = InstrumentationRegistry.getInstrumentation().targetContext
-        wordRoomDatabase = Room.inMemoryDatabaseBuilder(context, WordRoomDatabase::class.java).allowMainThreadQueries().build()
+        wordRoomDatabase = Room.inMemoryDatabaseBuilder(context, WordRoomDatabase::class.java).build()
         wordDao = wordRoomDatabase.wordDao()
 
         wordRoomDatabase.wordDao().insertAll(testWords)
